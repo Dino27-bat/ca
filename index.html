@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculadora</title>
+</head>
+<body>
+	<center><input type="text" id="resultado" readonly><br>
+    <button onclick="adicionarNumero('0')">0</button>
+	<button onclick="adicionarNumero('1')">1</button>
+	<button onclick="adicionarNumero('2')">2</button>
+	<button onclick="adicionarNumero('3')">3</button>
+	<button onclick="adicionarNumero('4')">4</button><br>
+	<button onclick="adicionarNumero('5')">5</button>
+	<button onclick="adicionarNumero('6')">6</button>
+	<button onclick="adicionarNumero('7')">7</button>
+	<button onclick="adicionarNumero('8')">8</button>
+	<button onclick="adicionarNumero('9')">9</button><br>
+	<button onclick="selecionarOperacao('*')">*</button>
+	<button onclick="selecionarOperacao('-')">-</button>
+	<button onclick="adicionarNumero('.')">.</button>
+    <button onclick="selecionarOperacao('/')">/</button>
+	<button onclick="selecionarOperacao('+')">+</button><br>
+	<button onclick="calcular()">=</button></center>
+	<script>
+		// Declara as variáveis iniciais
+		let operando1 = '';
+		let operando2 = '';
+		let operacaoAtual = null;
+
+		// Adiciona o número ao operando apropriado (1 ou 2)
+		function adicionarNumero(numero) {
+			if (operacaoAtual === null) {
+				operando1 += numero;
+				document.getElementById('resultado').value = operando1;
+			} else {
+				operando2 += numero;
+				document.getElementById('resultado').value = operando2;
+			}
+		}
+
+		// Seleciona a operação a ser realizada
+		function selecionarOperacao(operacao) {
+			operacaoAtual = operacao;
+		}
+
+		// Realiza a operação selecionada
+		function calcular() {
+			let resultado = null;
+
+			switch (operacaoAtual) {
+				case '+':
+					resultado = parseFloat(operando1) + parseFloat(operando2);
+					break;
+				case '-':
+					resultado = parseFloat(operando1) - parseFloat(operando2);
+					break;
+				case '*':
+					resultado = parseFloat(operando1) * parseFloat(operando2);
+					break;
+				case '/':
+					resultado = parseFloat(operando1) / parseFloat(operando2);
+					break;
+			}
+
+			// Exibe o resultado na tela e redefine as variáveis
+			document.getElementById('resultado').value = resultado;
+			operando1 = resultado.toString();
+			operando2 = '';
+			operacaoAtual = null;
+		}
+	</script>
+</body>
+</html>
